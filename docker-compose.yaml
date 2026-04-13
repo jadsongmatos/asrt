@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  legenda:
+    build: .
+    ports:
+      - "8123:8000"
+    environment:
+      - WHISPER_MODEL=small
+      - WHISPER_THREADS=4
+      - TRANSLATE_TO=pt
+    volumes:
+      - ./models:/models
+    # Para usar GPU: descomente e ajuste
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
