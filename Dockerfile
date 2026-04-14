@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY download_model.py .
-RUN python download_model.py
-
 COPY . .
+
+RUN python -c "from translator import Translator; t = Translator(); t.ensure('en', 'pt')"
 
 ENV WHISPER_MODEL=small \
     WHISPER_THREADS=4 \

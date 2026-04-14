@@ -72,15 +72,15 @@ class Transcriber:
             for seg in segments_iter:
                 segments.append(
                     Segment(
-                        start=seg.start / 1000.0,
-                        end=seg.end / 1000.0,
+                        start=seg.t0 / 1000.0,
+                        end=seg.t1 / 1000.0,
                         text=seg.text,
                     )
                 )
-                duration = seg.end / 1000.0
+                duration = seg.t1 / 1000.0
 
             text = "".join(s.text for s in segments).strip()
-            detected_lang = self.model.language or "en"
+            detected_lang = language if language else "en"
 
             return TranscriptionResult(
                 text=text,
